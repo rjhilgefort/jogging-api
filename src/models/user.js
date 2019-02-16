@@ -30,6 +30,6 @@ User.createUser = async newUser => {
 }
 
 User.findOneByUsername = username => User.findOne({ username })
-User.isPasswordMatch = bcrypt.compare 
+User.isPasswordMatch = bcrypt.compare
 
 export default User

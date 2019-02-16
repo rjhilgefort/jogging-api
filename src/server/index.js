@@ -41,26 +41,27 @@ export default async () => {
   // Passport
   app.use(passport.initialize())
   app.use(passport.session())
-  passport.use(new Strategy(async (username, password, done) => {
-    const user = await User.findOneByUsername(username)
-    if (!user) {
-      return done(null, false, { message: 'Unknown User'})
-    }
-    const isMatch = await User.isPasswordMatch(password, user.password)
-    if (isMatch) {
-      done(null, user)
-    } else {
-      done(null, false, { message: 'Invalid password' })
-    }
-  }))
-  passport.serializeUser((user, done) => done(null, user.id));
+  passport.use(
+    new Strategy(async (username, password, done) => {
+      const user = await User.findOneByUsername(username)
+      if (!user) {
+        return done(null, false, { message: 'Unknown User' })
+      }
+      const isMatch = await User.isPasswordMatch(password, user.password)
+      if (isMatch) {
+        done(null, user)
+      } else {
+        done(null, false, { message: 'Invalid password' })
+      }
+    }),
+  )
+  passport.serializeUser((user, done) => done(null, user.id))
   passport.deserializeUser((id, done) => {
-    return User.findById(id)
-      .then(
-        user => done(null, user),
-        err => done(err, null),
-      ) 
-  });
+    return User.findById(id).then(
+      user => done(null, user),
+      err => done(err, null),
+    )
+  })
 
   // ROUTES
   app.use('/', rootRoutes)

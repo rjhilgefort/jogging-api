@@ -16,18 +16,14 @@ router.post('/register', async ({ body }, res) => {
     return requiredParam(res, 'password')
   }
 
-  User.createUser(new User({ username, password }))
-    .then(user => {
-      respond(res, 200, user)
-    })
+  User.createUser(new User({ username, password })).then(user => {
+    respond(res, 200, user)
+  })
 })
 
-router.post('/login', 
-  passport.authenticate('local'), 
-  (req, res) => {
-    respond(res, 200, req.user)
-  }
-)
+router.post('/login', passport.authenticate('local'), (req, res) => {
+  respond(res, 200, req.user)
+})
 
 router.get('/current', (req, res) => {
   respond(res, 200, !!req.user ? req.user : null)
@@ -36,6 +32,6 @@ router.get('/current', (req, res) => {
 router.get('/logout', (req, res) => {
   req.logout()
   respond(res, 200, 'logout successful')
-});
+})
 
 export default router
