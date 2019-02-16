@@ -1,0 +1,8 @@
+{
+  "name": "jogging-api",
+  "version": "1.0.0",
+  "description": "Jogging API",
+  "main": "src/index.js",
+  "author": "rjhilgefort@gmail.com",
+  "license": "MIT"
+}
