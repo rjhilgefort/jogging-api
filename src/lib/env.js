@@ -8,6 +8,7 @@ dotenv.config()
 const serializeEnvsSpec = {
   NODE_ENV: R.identity,
   API_PORT: _.toInteger,
+  MORGAN_SETTING: R.identity,
 }
 const serializeEnvs = R.evolve(serializeEnvsSpec)
 

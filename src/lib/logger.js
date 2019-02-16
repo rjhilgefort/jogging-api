@@ -1,3 +1,4 @@
+// Methods
 export const log = console.log
 export const debug = (...args) => console.log('🐛: ', ...args)
 export const info = (...args) => console.log('ℹ️: ', ...args)
