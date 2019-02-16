@@ -4,5 +4,29 @@
   "description": "Jogging API",
   "main": "src/index.js",
   "author": "rjhilgefort@gmail.com",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf node_modules",
+    "reinstall": "yarn clean && yarn install",
+    "postinstall": "cp -n .env-example .env || true",
+    "start": "babel-node src/index.js",
+    "start:watch": "onchange 'src/**/*.js' -i -k -- babel-node ./src/index.js",
+    "docker:start": "run-s docker:start:all",
+    "docker:start:all": "docker-compose up",
+    "docker:start:all:background": "docker-compose up -d",
+    "docker:start:mongo": "docker-compose up mongodb",
+    "docker:start:mongo:background": "docker-compose up mongodb -d",
+    "docker:stop": "docker-compose down",
+    "lint": "yarn lint:fix",
+    "lint:watch": "onchange '**/*.js' -i -- yarn lint",
+    "lint:fix": "prettier-standard 'src/**/*.js'"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "npm-run-all": "^4.1.5",
+    "onchange": "^5.2.0",
+    "prettier-standard": "^9.1.1"
+  }
 }
