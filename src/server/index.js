@@ -6,10 +6,7 @@ import * as log from '../lib/logger'
 import { cors } from './middleware'
 import root from './routes/root'
 
-const {
-  API_PORT,
-  MORGAN_SETTING,
-} = env
+const { API_PORT, MORGAN_SETTING } = env
 
 export default async () => {
   const app = express()
