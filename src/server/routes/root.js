@@ -1,12 +1,10 @@
 import express from 'express'
+import { respond } from './lib'
 
 const router = express.Router()
 
 router.get('/', (_req, res) => {
-  const status = 200
-
-  res.status(status)
-  res.json({ status, data: 'OK' })
+  respond(res, 200, 'OK')
 })
 
 export default router
