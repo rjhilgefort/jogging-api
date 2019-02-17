@@ -9,9 +9,10 @@ import { Strategy } from 'passport-local'
 import env from '../lib/env'
 import * as log from '../lib/logger'
 import User from '../models/user'
-import { cors } from './middleware'
+import { cors, isAuthenticated } from './middleware'
 import rootRoutes from './routes/root'
 import userRoutes from './routes/user'
+import jogRoutes from './routes/jog'
 
 const {
   API_PORT,
@@ -66,6 +67,7 @@ export default async () => {
   // ROUTES
   app.use('/', rootRoutes)
   app.use('/user', userRoutes)
+  app.use('/jog', isAuthenticated, jogRoutes)
 
   log.log('\n')
   log.log('======================================================')

@@ -16,9 +16,8 @@ router.post('/register', async ({ body }, res) => {
     return requiredParam(res, 'password')
   }
 
-  User.createUser(new User({ username, password })).then(user => {
-    respond(res, 200, user)
-  })
+  User.createUser(new User({ username, password }))
+    .then(user => respond(res, 200, user))
 })
 
 router.post('/login', passport.authenticate('local'), (req, res) => {

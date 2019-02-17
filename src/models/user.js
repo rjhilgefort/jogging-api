@@ -16,17 +16,14 @@ const UserSchema = mongoose.Schema({
 
 const User = mongoose.model('User', UserSchema)
 
-User.createUser = async newUser => {
-  const { password: plainTextPassword } = newUser
+User.createUser = async user => {
+  const { password: plainTextPassword } = user
 
-  newUser.password = await bcrypt
+  user.password = await bcrypt
     .genSalt(10)
     .then(salt => bcrypt.hash(plainTextPassword, salt))
 
-  return newUser.save().then(x => {
-    log.debug(x)
-    return x
-  })
+  return user.save()
 }
 
 User.findOneByUsername = username => User.findOne({ username })

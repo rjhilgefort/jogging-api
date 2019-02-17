@@ -8,3 +8,14 @@ export const cors = (_req, res, next) => {
   )
   next()
 }
+
+export const isAuthenticated = (req, res, next) => {
+  if (!!req.user) {
+    return next();
+  }
+  res.status(401)
+  res.json({
+    status: 401,
+    data: 'You must login',
+  })
+}
