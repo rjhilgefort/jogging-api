@@ -22,3 +22,5 @@ services:
       - .env
     ports:
       - '${API_PORT}:${API_PORT}'
+    depends_on:
+      - mongodb
